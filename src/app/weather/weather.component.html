@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="wrap-content">
+    <div class="input-content">
+      <input type="text" placeholder="Enter your city" [value]="city()" (input)="updateCity($event)">
+    </div>
+    <button class="btn-content" (click)="searchWeather()" [disabled]="!city()">
+      search
+    </button>
+  </div>
+</div>
+
+@if (loadWeatherDataByCity$ | async; as weatherData) {
+  <div class="weather">
+    <div class="weather-wrap">
+      <div class="weather-icon">
+        <img [src]="weatherData.weather[0].icon | weatherIconPipeTs" alt="weather-icon" width="100" height="100">
+      </div>
+      <div class="main-temp">{{weatherData.main.temp | number: '1.0-0'}} <div class="сelsius">°C</div></div>
+      <div class="weather-description">
+        <ul>
+          <li>{{weatherData.weather[0].description}}</li>
+          <li>Humidity: {{weatherData.main.humidity}} % </li>
+          <li>Wind speed: {{weatherData.wind.speed}} km/h </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="data-wrap">
+      <div class="weather-title">
+        The Weather
+      </div>
+      <div class="data">
+         {{today() | date: 'EEEE, h:mm a' }}
+      </div>
+      <div class="weather-description">
+        {{weatherData.weather[0].main}}
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="notCityName">
+    City not found
+  </div>
+}
+
