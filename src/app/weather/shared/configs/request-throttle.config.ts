@@ -1,0 +1,1 @@
+export const REQUEST_THROTTLE_CONFIG = 10;

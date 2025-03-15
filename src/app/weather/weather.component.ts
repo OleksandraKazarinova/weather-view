@@ -38,7 +38,8 @@ export class WeatherComponent implements OnInit {
 
     if (currentCity) {
       this.today.set(new Date());
-      this.loadWeatherDataByCity$ = this.weatherService.getWeather(currentCity);
+      const currentMinutes = this.today().getMinutes();
+      this.loadWeatherDataByCity$ = this.weatherService.getWeather(currentCity, currentMinutes);
     }
   }
 }
